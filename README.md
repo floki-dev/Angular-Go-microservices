@@ -1,1 +1,1 @@
-# ang-go
+# Angular and Go project
