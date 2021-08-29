@@ -4,3 +4,23 @@ services:
     build: .
     ports:
       - 8000:8000
+    depends_on:
+      - db
+
+  postgres:
+    image: postgres:10.1
+    container_name: ang-go-postgres
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: root
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+      - ./configs/postgres/:/docker-entrypoint-initdb.d/
+
+volumes:
+  dbdata:
+    driver: local
